@@ -100,6 +100,7 @@ await expect(page.locator('text=Logged in as '+firstName)).toBeVisible();
 
 // 17. Click 'Delete Account' button
 
+
 await page.locator('[href="/delete_account"]').click()
 
 // 18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
