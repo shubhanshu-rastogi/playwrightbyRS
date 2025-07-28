@@ -1,6 +1,28 @@
 // @ts-check
 import { chromium, defineConfig, devices } from '@playwright/test';
 
+require('dotenv').config(); // Load .env
+//const { defineConfig } = require('@playwright/test');
+const env = require('./config/env.config');
+
+module.exports = defineConfig({
+  use: {
+    baseURL: env.baseURL,
+    headless: false,                  // 👈 run with browser UI
+    actionTimeout: env.timeout,
+    trace: 'on',
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
+  },
+  timeout: 60 * 1000,
+  retries: 0,
+  //reporter: 'html',
+  reporter: [
+    ['list'], 
+    ['allure-playwright']
+  ],
+});
+
 
 
 /**

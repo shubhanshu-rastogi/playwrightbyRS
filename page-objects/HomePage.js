@@ -1,4 +1,5 @@
 const { test, expect } = require('@playwright/test');
+const config = require('../config/env.config');
 
 exports.HomePage = class HomePage {
 
@@ -11,7 +12,7 @@ exports.HomePage = class HomePage {
     }
 
     async open(){
-        await this.page.goto('http://automationexercise.com')
+        await this.page.goto(config.baseURL);
         await this.page.waitForLoadState('load');
     }
 

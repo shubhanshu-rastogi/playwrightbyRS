@@ -52,7 +52,7 @@ exports.SignupPage = class SignupPage {
     await this.page.locator('#state').fill(user.state);
     await this.page.locator('[name="city"]').fill(user.city);
     await this.page.locator('#zipcode').fill(user.zipcode);
-    await this.page.locator('#mobile_number').fill(user.mobile);
+    await this.page.locator('#mobile_number').fill(String(user.mobile));
   }
 
   async createAccount() {

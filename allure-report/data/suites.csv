@@ -1,0 +1,2 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","22283","Register User using Excel data","","Mon Jul 28 09:45:37 BST 2025","passed","Mon Jul 28 09:45:59 BST 2025","","tests\registerUserNewExcel.spec.js","",""
