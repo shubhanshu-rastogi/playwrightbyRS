@@ -1,8 +1,10 @@
 const { test, expect } = require('@playwright/test');
+const ElementUtils = require('../utils/ElementUtils');
 
 exports.LoginPage=class LoginPage {
-    constructor(page){
+    constructor(page, utils=new ElementUtils()){
         this.page=page;
+        this.utils=utils;
         this.loginEmail = page.locator('[data-qa="login-email"]');
         this.loginPassword = page.locator('[data-qa="login-password"]');
         this.loginButton = page.locator('[data-qa="login-button"]');
@@ -10,9 +12,9 @@ exports.LoginPage=class LoginPage {
     }
 
     async login(email,password){
-        await this.loginEmail.fill(email);
-        await this.loginPassword.fill(password);
-        await this.loginButton.click();
+        await this.utils.typeText(this.loginEmail, email);
+        await this.utils.typeText(this.loginPassword, password);
+        await this.utils.clickElement(this.loginButton);
     }
 
     async verifyLoggedInAs (firstName){

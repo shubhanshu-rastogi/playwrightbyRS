@@ -1,8 +1,10 @@
 const { expect } = require('@playwright/test');
+const ElementUtils = require('../utils/ElementUtils');
 
 exports.SignupPage = class SignupPage {
-  constructor(page) {
+  constructor(page,utils = new ElementUtils()) {
     this.page = page;
+    this.utils = utils;
     this.signupForm = page.locator('.signup-form');
     this.nameInput = page.getByPlaceholder('Name');
     this.emailInput = page.locator('[data-qa="signup-email"]');
@@ -22,12 +24,12 @@ exports.SignupPage = class SignupPage {
   }
 
   async enterBasicInfo(name, email) {
-    await this.nameInput.fill(name);
-    await this.emailInput.fill(email);
+    await this.utils.typeText(this.nameInput, name);
+    await this.utils.typeText(this.emailInput, email);
   }
 
   async submitForm() {
-    await this.signupButton.click();
+    await this.utils.clickElement(this.signupButton);
     await this.accountInfoHeader.waitFor();
   }
 
@@ -64,7 +66,7 @@ exports.SignupPage = class SignupPage {
   }
 
   async continueToHome() {
-    await this.continueButton.click();
+    await this.utils.clickElement(this.continueButton);
   }
 
   async verifyLoggedInAs(name) {
@@ -72,7 +74,7 @@ exports.SignupPage = class SignupPage {
   }
 
   async deleteAccount() {
-    await this.deleteAccountLink.click();
+    await this.utils.clickElement(this.deleteAccountLink);
   }
 
   async verifyAccountDeleted() {

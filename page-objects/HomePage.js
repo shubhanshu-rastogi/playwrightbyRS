@@ -1,10 +1,13 @@
 const { test, expect } = require('@playwright/test');
 const config = require('../config/env.config');
+const ElementUtils = require('../utils/ElementUtils');
+
 
 exports.HomePage = class HomePage {
 
-    constructor(page){
+    constructor(page, utils = new ElementUtils){
         this.page=page;
+        this.utils=utils;
          this.signupLoginLink = page.locator('a[href="/login"]');
          this.homeImage = page.locator('[alt="Website for automation practice"]');
          this.consentButton = page.locator('button:has-text("Consent")');
@@ -16,18 +19,19 @@ exports.HomePage = class HomePage {
         await this.page.waitForLoadState('load');
     }
 
+  
     async handleConsent() {
-        if (await this.consentButton.isVisible()) {
-        await this.consentButton.click();
+        if (await this.utils.isVisible(this.consentButton)) {
+        await this.utils.clickElement(this.consentButton);
     }
-    }
+  }
 
     async verifyHomePage() {
         await expect(this.homeImage).toBeVisible();
     }
 
     async clickSignupLogin() {
-        await this.signupLoginLink.click();
+        await this.utils.clickElement(this.signupLoginLink);
   }
 
 }
